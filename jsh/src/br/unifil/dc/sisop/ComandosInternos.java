@@ -5,6 +5,8 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import javax.swing.plaf.synth.SynthRootPaneUI;
+
 /**
  * Write a description of class ComandosInternos here.
  *
@@ -57,8 +59,13 @@ public final class ComandosInternos {
             File caminho = new File(path);
             System.setProperty("user.dir", caminho.getParent());
         }else{
-            String path = System.getProperty("user.dir") + "/" + nomeDir;   
-            System.setProperty("user.dir", path);
+            File nomeFile = new File(nomeDir);
+            if (nomeFile.exists()) {
+                String path = System.getProperty("user.dir") + "/" + nomeDir;   
+                System.setProperty("user.dir", path);
+            }else{
+                System.out.println("Arquivo ou duritorio inixistente");
+            }
         }
         return 0;
     }

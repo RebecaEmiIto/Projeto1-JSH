@@ -1,5 +1,6 @@
 package br.unifil.dc.sisop;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -97,7 +98,7 @@ public final class Jsh {
 
                 default:
                     executarPrograma(comando);
-                    System.out.println("Invalid arguments.");
+                    System.out.println("");
                     break;
             }
         } catch (Exception e) {
@@ -106,7 +107,24 @@ public final class Jsh {
     }
 
     public static int executarPrograma(ComandoPrompt comando) {
-        System.out.println("Invalid arguments. Please, RTFM.");
+        try{    
+            list = comando.getArgumentos();
+            String argumento = list.get(1);
+            String[] pathnames;
+            File nomeFile = new File(argumento);
+            pathnames = nomeFile.list();
+            String comandoString = comando.getNome();
+            for (String pathname : pathnames) {
+                if(pathname == comandoString){
+                    
+                }else{
+                    System.out.println("o comando ou programa não existe");
+                }
+            }
+            //System.out.println("Invalid arguments");
+        }catch(Exception e){
+            System.err.print("Invalid arguments");
+        }
         return 1;
     }
 
